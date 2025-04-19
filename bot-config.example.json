@@ -1,0 +1,28 @@
+{
+  "bot": {
+    "language": "English"
+  },
+  "polarsteps": {
+    "trips": [
+      {
+        "trip_id": "1234",
+        "album_secret": "?s=..."
+      },
+      {
+        "trip_id": "5678",
+        "album_secret": "?s=..."
+      }
+    ]
+  },
+  "telegram_bot": {
+    "token": "",
+    "chat_id": ""
+  },
+  "gemini": {
+    "api_key": ""
+  },
+  "google_search": {
+    "api_key": "",
+    "custom_search_engine_id": ""
+  }
+}

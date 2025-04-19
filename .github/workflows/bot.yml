@@ -1,0 +1,47 @@
+name: Daily Bot
+
+on:
+  #schedule:
+    #- cron: '0 7 * * *' # every day at 9:00 UTC
+  workflow_dispatch:     # allows manual runs
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Get current branch name
+        id: branch
+        run: echo "branch_name=${GITHUB_REF##*/}" >> $GITHUB_OUTPUT
+
+      - name: Create bot-config.json
+        if: steps.branch.outputs.branch_name == 'main'
+        run: echo "$BOT_CONFIG_JSON" > bot-config.json
+        env:
+          BOT_CONFIG_JSON: ${{ secrets.BOT_CONFIG_JSON }}
+
+      - name: Create bot-config.json (dev)
+        if: steps.branch.outputs.branch_name != 'main'
+        run: echo "$BOT_CONFIG_JSON" > bot-config.json
+        env:
+          BOT_CONFIG_JSON: ${{ secrets.DEV_BOT_CONFIG_JSON }}
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22
+
+      - name: Install ffmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - name: Install dependencies
+        run: npm i
+
+      - name: Build
+        run: npm run build
+
+      - name: Run bot
+        run: npm start -- bot
