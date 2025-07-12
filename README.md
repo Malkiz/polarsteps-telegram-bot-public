@@ -181,3 +181,5 @@ We spent the day hiking around Ben Lomond. The views from the saddle were insane
 ## ❤️ Credits
 
 Created by Malkiz. Inspired by long adventures and the joy of reliving them, one day at a time.
+
+Read the [blog post](https://malkiz.github.io/2025/07/12/polarsteps-telegram-bot/).
